@@ -5,19 +5,19 @@ using System.Text.Json.Serialization;
 
 namespace Entities.Concrete
 {
-    public class UserTest:IEntity
+    public class UserTest : IEntity
     {
         [Key]
         [JsonIgnore]
         [Column(Order = 1)]
         public int Id { get; set; }
         [ForeignKey("User")]
-        
+
         public int UserId { get; set; }
         public string? Department { get; set; }
         public string? Section { get; set; }
         public string? Unit { get; set; }
-        
+
         //[DataType(DataType.DateTime)]
         //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
         public DateTime Date { get; set; }

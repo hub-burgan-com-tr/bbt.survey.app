@@ -9,7 +9,7 @@ namespace DataAccess.Concrete.EntityFramework
     public class UserContext : DbContext
     {
 
-       
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -25,7 +25,7 @@ namespace DataAccess.Concrete.EntityFramework
 
 
             base.OnConfiguring(optionsBuilder);
-           
+
         }
 
 

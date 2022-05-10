@@ -15,30 +15,30 @@ namespace Business.Concrete
     {
 
         IUserDal _userDal;
-        
+
 
 
 
         public UserManager(IUserDal userDal)
         {
             _userDal = userDal;
-            
+
 
         }
 
-      
+
 
         public IDataResult<User> GetAll(string sicilNo)
         {
-            User user= _userDal.GetAll(x => x.SicilNo == sicilNo).OrderByDescending(x => x.RecTime).FirstOrDefault();
+            User user = _userDal.GetAll(x => x.SicilNo == sicilNo).OrderByDescending(x => x.RecTime).FirstOrDefault();
             //List<User> result = _userDal.GetAll(x => x.SicilNo == sicilNo).OrderByDescending(x=>x.RecTime).FirstOrDefault();
-            
-         
 
-                return new SuccessDataResult<User>(user,Messages.Listed);
 
-          
-            
+
+            return new SuccessDataResult<User>(user, Messages.Listed);
+
+
+
         }
     }
 }
