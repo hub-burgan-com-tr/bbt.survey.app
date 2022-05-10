@@ -26,7 +26,7 @@ namespace Entities.Concrete
         public int Vote { get; set; }
         public int VoteLimit { get; set; }
 
-        public ICollection<UserInfo> userInfos { get; set; }
+        //public ICollection<UserInfo> userInfos { get; set; }
 
     }
 }
