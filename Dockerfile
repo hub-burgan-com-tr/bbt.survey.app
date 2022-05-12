@@ -7,17 +7,17 @@ USER surveyuser
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["WebAPI\WebAPI.csproj", "WebAPI/"]
-COPY ["Core\Core.csproj", "Core/"]
-COPY ["Business\Business.csproj", "Business/"]
-COPY ["DataAccess\DataAccess.csproj", "DataAccess/"]
-RUN dotnet restore "WebAPI\WebAPI.csproj"
+COPY ["WebAPI/WebAPI.csproj", "WebAPI/"]
+COPY ["Core/Core.csproj", "Core/"]
+COPY ["Business/Business.csproj", "Business/"]
+COPY ["DataAccess/DataAccess.csproj", "DataAccess/"]
+RUN dotnet restore "WebAPI/WebAPI.csproj"
 COPY . .
 WORKDIR "/src/bbt.survey.app"
-RUN dotnet build "WebAPI\WebAPI.csproj" -c Release -o /app/build
+RUN dotnet build "WebAPI/WebAPI.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "WebAPI\WebAPI.csproj" -c Release -o /app/publish
+RUN dotnet publish "WebAPI/WebAPI.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
