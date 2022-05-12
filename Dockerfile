@@ -13,7 +13,7 @@ COPY ["Business/Business.csproj", "Business/"]
 COPY ["DataAccess/DataAccess.csproj", "DataAccess/"]
 RUN dotnet restore "WebAPI/WebAPI.csproj"
 COPY . .
-WORKDIR "/src/bbt.survey.app"
+WORKDIR /src
 RUN dotnet build "WebAPI/WebAPI.csproj" -c Release -o /app/build
 
 FROM build AS publish
