@@ -8,6 +8,7 @@ USER surveyuser
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["WebAPI/WebAPI.csproj", "WebAPI/"]
+COPY ["Entities/Entities.csproj", "Entities/"]
 COPY ["Core/Core.csproj", "Core/"]
 COPY ["Business/Business.csproj", "Business/"]
 COPY ["DataAccess/DataAccess.csproj", "DataAccess/"]
