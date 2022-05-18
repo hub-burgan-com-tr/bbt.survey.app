@@ -58,14 +58,16 @@ namespace WebAPI.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            _logger.LogInformation("Vote bilgisi Get edildi");
+            
 
             var result = _userTestService.GetAll();
+            _logger.LogInformation("Vote bilgisi Get edildi");
             if (result.Success)
             {
                 return Ok(result.Data);
             }
             return BadRequest(result.Message);
+            
         }
     }
 }

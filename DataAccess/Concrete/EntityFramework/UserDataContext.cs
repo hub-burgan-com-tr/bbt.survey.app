@@ -24,13 +24,19 @@ namespace DataAccess.Concrete.EntityFramework
 
             IConfigurationRoot configuration = new ConfigurationBuilder()
            .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
-           .AddJsonFile("appsettings.json")
+           .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+           .AddJsonFile($"appsettings.{GetEnviroment()}.json", false, true)
+
            .Build();
             optionsBuilder.UseSqlServer(configuration.GetConnectionString("UserDataConnection"));
 
 
             base.OnConfiguring(optionsBuilder);
 
+        }
+        string? GetEnviroment()
+        {
+            return Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
         }
 
         public DbSet<User>? PERTRANS1 { get; set; }

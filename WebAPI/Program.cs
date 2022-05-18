@@ -27,6 +27,8 @@ builder.Services.AddSingleton<IUserService, UserManager>();
 builder.Services.AddSingleton<IUserInfoDal, EfUserInfoDal>();
 builder.Services.AddSingleton<IUserInfoService, UserInfoManager>();
 builder.Services.AddSignalR();
+builder.Services.AddDbContext<UserContext>();
+builder.Services.AddDbContext<UserDataContext>();
 //builder.Services.AddHostedService<AddDataAutomatically>();
 
 
@@ -52,6 +54,7 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    //app.UseExceptionHandler("/Error");
     app.UseSwagger();
     app.UseSwaggerUI();
 }
@@ -62,6 +65,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.UseCors("*");
 app.UseRouting();
+//app.UseDeveloperExceptionPage();
 //app.UseCors(x => x
 //                .AllowAnyMethod()
 //                .AllowAnyHeader()

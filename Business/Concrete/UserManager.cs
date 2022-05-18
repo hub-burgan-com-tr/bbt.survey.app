@@ -30,12 +30,23 @@ namespace Business.Concrete
 
         public IDataResult<User> GetAll(string sicilNo)
         {
-            User user = _userDal.GetAll(x => x.SicilNo == sicilNo).OrderByDescending(x => x.RecTime).FirstOrDefault();
-            //List<User> result = _userDal.GetAll(x => x.SicilNo == sicilNo).OrderByDescending(x=>x.RecTime).FirstOrDefault();
+            try
+            {
+                User user = _userDal.GetAll(x => x.SicilNo == sicilNo).OrderByDescending(x => x.RecTime).FirstOrDefault();
+                //List<User> result = _userDal.GetAll(x => x.SicilNo == sicilNo).OrderByDescending(x=>x.RecTime).FirstOrDefault();
 
 
 
-            return new SuccessDataResult<User>(user, Messages.Listed);
+                return new SuccessDataResult<User>(user, Messages.Listed);
+            }
+            catch (Exception e)
+            {
+
+                Console.WriteLine(e.Message);
+                //return new ErrorDataResult<User>(Messages.CannotBeListed);
+                return new ErrorDataResult<User>(e.Message);
+            }
+            
 
 
 

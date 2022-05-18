@@ -43,8 +43,9 @@ namespace WebAPI.Controllers
 
         public IActionResult Get(string sicilNo)
         {
-            _logger.LogInformation("Kullanıcı bilgisi datası Get edildi",sicilNo);
+            
             var result=_userInfoService.GetAll(sicilNo);
+            _logger.LogInformation("Kullanıcı bilgisi datası Get edildi");
             if (result.Success)
             {
                 return Ok(result);
