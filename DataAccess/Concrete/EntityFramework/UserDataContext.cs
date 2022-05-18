@@ -19,14 +19,14 @@ namespace DataAccess.Concrete.EntityFramework
             //optionsBuilder.UseSqlServer(@"Server=DESKTOP-0UBP1P5;Database=SurveyTest;Trusted_Connection=true");
             //optionsBuilder.UseSqlServer(@"Server=10.180.20.125;Database=SurveyTest;User Id=DEBUGUSER;Password=aAR=GsG4");
             //optionsBuilder.UseSqlServer(@"Server=10.200.0.14;Database=HUMANIST;User Id=DEBUGUSER;Password=aAR=GsG4");
-            //optionsBuilder.UseSqlServer(@"Server=10.200.0.14;Database=HUMANIST;Trusted_Connection=true");
+            optionsBuilder.UseSqlServer(@"Server=10.200.0.14;Database=HUMANIST;Trusted_Connection=true");
             //optionsBuilder.UseSqlServer(@"Server=10.180.20.125;Database=SurveyTest;User Id=DEBUGUSER;Password=aAR=GsG4");
 
-            IConfigurationRoot configuration = new ConfigurationBuilder()
-           .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
-           .AddJsonFile("appsettings.Test.json")
-           .Build();
-            optionsBuilder.UseSqlServer(configuration.GetConnectionString("UserDataConnection"));
+            //IConfigurationRoot configuration = new ConfigurationBuilder()
+           //.SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+           //.AddJsonFile("appsettings.Test.json")
+           //.Build();
+            //optionsBuilder.UseSqlServer(configuration.GetConnectionString("UserDataConnection"));
 
 
             base.OnConfiguring(optionsBuilder);
