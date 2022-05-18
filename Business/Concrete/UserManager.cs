@@ -30,7 +30,11 @@ namespace Business.Concrete
 
         public IDataResult<User> GetAll(string sicilNo)
         {
+
+            
+
             try
+
             {
                 User user = _userDal.GetAll(x => x.SicilNo == sicilNo).OrderByDescending(x => x.RecTime).FirstOrDefault();
                 //List<User> result = _userDal.GetAll(x => x.SicilNo == sicilNo).OrderByDescending(x=>x.RecTime).FirstOrDefault();
@@ -46,7 +50,7 @@ namespace Business.Concrete
                 //return new ErrorDataResult<User>(Messages.CannotBeListed);
                 return new ErrorDataResult<User>(e.Message);
             }
-            
+
 
 
 
