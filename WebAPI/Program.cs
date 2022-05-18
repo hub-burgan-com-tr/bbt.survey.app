@@ -27,6 +27,8 @@ builder.Services.AddSingleton<IUserService, UserManager>();
 builder.Services.AddSingleton<IUserInfoDal, EfUserInfoDal>();
 builder.Services.AddSingleton<IUserInfoService, UserInfoManager>();
 builder.Services.AddSignalR();
+builder.Services.AddDbContext<UserContext>();
+builder.Services.AddDbContext<UserDataContext>();
 //builder.Services.AddHostedService<AddDataAutomatically>();
 
 
