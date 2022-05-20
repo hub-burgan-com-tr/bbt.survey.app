@@ -25,7 +25,7 @@ namespace DataAccess.Concrete.EntityFramework
             IConfigurationRoot configuration = new ConfigurationBuilder()
            .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
 
-           .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+           .AddJsonFile("appsettings.Test.json", optional: false, reloadOnChange: true)
            
            
 
