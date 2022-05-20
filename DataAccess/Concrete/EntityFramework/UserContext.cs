@@ -20,7 +20,7 @@ namespace DataAccess.Concrete.EntityFramework
             IConfigurationRoot configuration = new ConfigurationBuilder()
             .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
             .AddJsonFile("appsettings.json",optional:false,reloadOnChange:true)
-            .AddJsonFile($"appsettings.{GetEnviroment()}.json", false, true)
+            
 
             .Build();
             optionsBuilder.UseSqlServer(configuration.GetConnectionString("UserConnection"));
@@ -30,10 +30,7 @@ namespace DataAccess.Concrete.EntityFramework
 
         }
         
-        string? GetEnviroment()
-        {
-            return Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
-        }
+        
        
 
 
