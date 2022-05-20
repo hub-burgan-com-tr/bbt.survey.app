@@ -26,7 +26,7 @@ namespace DataAccess.Concrete.EntityFramework
            .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
 
            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-           .AddJsonFile($"appsettings.{GetEnviroment()}.json", false, true)
+           
            
 
            .Build();
@@ -37,10 +37,7 @@ namespace DataAccess.Concrete.EntityFramework
 
         }
         
-        string? GetEnviroment()
-        {
-            return Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
-        }
+        
         
 
         public DbSet<User>? PERTRANS1 { get; set; }
