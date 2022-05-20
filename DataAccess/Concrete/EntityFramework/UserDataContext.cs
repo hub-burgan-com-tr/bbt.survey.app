@@ -26,10 +26,7 @@ namespace DataAccess.Concrete.EntityFramework
            .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
 
            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-           .AddJsonFile($"appsettings.{GetEnviroment()}.json", false, true)
-
-
-           .AddJsonFile("appsettings.Test.json")
+           
 
            .Build();
             optionsBuilder.UseSqlServer(configuration.GetConnectionString("UserDataConnection"));
@@ -38,10 +35,7 @@ namespace DataAccess.Concrete.EntityFramework
             base.OnConfiguring(optionsBuilder);
 
         }
-        string? GetEnviroment()
-        {
-            return Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
-        }
+        
 
         public DbSet<User>? PERTRANS1 { get; set; }
     }
