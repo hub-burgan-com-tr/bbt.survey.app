@@ -19,7 +19,7 @@ namespace DataAccess.Concrete.EntityFramework
             //optionsBuilder.UseSqlServer(@"Server=10.180.20.125;Database=SurveyTest;User Id=DEBUGUSER;Password=aAR=GsG4");
             IConfigurationRoot configuration = new ConfigurationBuilder()
             .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
-            .AddJsonFile("appsettings.json",optional:false,reloadOnChange:true)
+            .AddJsonFile("appsettings.Test.json",optional:false,reloadOnChange:true)
             
 
             .Build();
