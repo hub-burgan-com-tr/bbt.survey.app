@@ -2,7 +2,7 @@
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /app
 
-
+RUN sed -i 's/TLSv1.2/TLSv1.0/g' /etc/ssl/openssl.cnf
 RUN adduser -u 5679 --disabled-password --gecos "" surveyuser && chown -R surveyuser:surveyuser /app
 USER surveyuser
 
