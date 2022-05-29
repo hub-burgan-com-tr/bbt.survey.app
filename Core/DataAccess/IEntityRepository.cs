@@ -11,7 +11,12 @@ namespace Core.DataAccess
     //)
     public interface IEntityRepository<T> where T : class, IEntity, new()
     {
+        //Bu expressionda T tipinde tek bir data dönecek.
+        //Delege T tipinde parametre alacak ve geriye bool tipinde değer döndürecek.
+        //filterla birlikte filtre verilmesini zorunlu kıldım. Çünkü tek bir data dönecek ve dönecek datayı filterla bulacak.
         T Get(Expression<Func<T, bool>> filter);
+        //Yukarıda yazılan yorum satırı aynı şekilde geçerli olup tek farkı filterın null olmasıdır.
+        //Filter null olduğundan istersek bütün bir datayı döneriz ya da filtre vererek yine o filtreye uyan bütün dataları getirebiliriz.
         List<T> GetAll(Expression<Func<T, bool>>? filter = null);
         void Add(T entity);
         void Update(T entity);
