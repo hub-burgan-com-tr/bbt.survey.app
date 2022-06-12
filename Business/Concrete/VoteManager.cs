@@ -36,8 +36,11 @@ namespace Business.Concrete
             }
             else if(result.VoteDate!=vote.VoteDate)
             {
-                result.VoteLimit = 2;
+                result.VoteLimit = 1;
+                vote.UserId=null;
+                _voteDal.Add(vote);
                 _userInfoDal.Update(result);
+                return new SuccessResult(Messages.VoteSuccess);
             }
             else
             {
