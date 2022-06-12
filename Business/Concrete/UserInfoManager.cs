@@ -45,5 +45,10 @@ namespace Business.Concrete
             UserInfo userInfo = _userInfoDal.GetAll(x=>x.UserId==sicilNo).FirstOrDefault();
             return new SuccessDataResult<UserInfo>(userInfo,Messages.Listed);
         }
+
+        public IResult Update(UserInfo userInfo)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

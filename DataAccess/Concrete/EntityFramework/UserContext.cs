@@ -37,7 +37,7 @@ namespace DataAccess.Concrete.EntityFramework
         public DbSet<UserTest>? UserTest { get; set; }
         public DbSet<VoteLimit>? VoteLimits { get; set; }
         public DbSet<UserInfo>? Users { get; set; }
-        public DbSet<Vote> Votes { get; set; }
+        public DbSet<Vote>? Votes { get; set; }
 
 
 

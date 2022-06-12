@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.Constants;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -22,20 +23,25 @@ namespace Business.Concrete
         }
         public IResult Add(Vote vote)
         {
-            vote.Date = DateTime.Now;
+            vote.VoteDate = DateTime.Now.Date;
             var result= _userInfoDal.Get(x=>x.UserId==vote.UserId);
             if (result.VoteLimit>0&&result.VoteDate<=vote.VoteDate)
             {
+                vote.UserId = null;
                 _voteDal.Add(vote);
                 result.VoteLimit--;
                 result.VoteDate = vote.VoteDate;
                 _userInfoDal.Update(result);
-                return new SuccessDataResult<Vote>();
+                return new SuccessResult(Messages.VoteSuccess);
             }
-            else
+            else if(result.VoteDate!=vote.VoteDate)
             {
                 result.VoteLimit = 2;
                 _userInfoDal.Update(result);
+            }
+            else
+            {
+                return new ErrorResult(Messages.VoteFailed);
             }
 
             

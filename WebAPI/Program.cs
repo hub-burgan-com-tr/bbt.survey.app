@@ -26,6 +26,8 @@ builder.Services.AddSingleton<IUserDal, EfUserDal>();
 builder.Services.AddSingleton<IUserService, UserManager>();
 builder.Services.AddSingleton<IUserInfoDal, EfUserInfoDal>();
 builder.Services.AddSingleton<IUserInfoService, UserInfoManager>();
+builder.Services.AddSingleton<IVoteService, VoteManager>();
+builder.Services.AddSingleton<IVoteDal, EfVoteDal>();
 builder.Services.AddSignalR();
 builder.Services.AddDbContext<UserContext>();
 builder.Services.AddDbContext<UserDataContext>();
