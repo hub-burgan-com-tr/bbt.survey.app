@@ -11,6 +11,7 @@ namespace Business.Abstract
     public interface IUserInfoService
     {
         IResult Add(UserInfo userInfo);
+        IResult Update(UserInfo userInfo);
         IDataResult<UserInfo> GetAll(string sicilNo);
     }
 }

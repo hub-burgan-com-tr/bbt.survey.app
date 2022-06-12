@@ -18,6 +18,11 @@ namespace Entities.Concrete
         public string? Section { get; set; }
         public string? Unit { get; set; }
 
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
+        public DateTime VoteDate { get; set; }
+
+        public int VoteLimit { get; set; }
+
         //[ForeignKey("UserTest")]
         //public int UserTestRefId { get; set; }
         //public UserTest UserTest { get; set; }

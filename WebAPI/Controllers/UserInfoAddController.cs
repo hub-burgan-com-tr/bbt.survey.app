@@ -37,6 +37,20 @@ namespace WebAPI.Controllers
         }
 
 
+        [HttpPut]
+
+        public IActionResult Put(UserInfo userInfo)
+        {
+            _logger.LogInformation("Put kullanılmayan");
+            var result = _userInfoService.Update(userInfo);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result.Message);
+        }
+
+
 
 
         [HttpGet]

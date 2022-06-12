@@ -30,8 +30,10 @@ namespace Business.Concrete
             }
             else
             {
+                userInfo.VoteLimit = 2;
                 _userInfoDal.Add(userInfo);
                 UserInfo resultData = _userInfoDal.GetAll(x => x.UserId == userInfo.UserId).FirstOrDefault();
+
 
                 return new SuccessDataResult<UserInfo>(resultData, Messages.UserInfoCheck);
 
