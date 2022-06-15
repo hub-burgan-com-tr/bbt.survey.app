@@ -27,7 +27,7 @@ namespace Business.Concrete
             var result= _userInfoDal.Get(x=>x.UserId==vote.UserId);
             if (result.VoteLimit>0&&result.VoteDate<=vote.VoteDate)
             {
-                vote.UserId = null;
+                //vote.UserId = null;
                 _voteDal.Add(vote);
                 result.VoteLimit--;
                 result.VoteDate = vote.VoteDate;
@@ -37,7 +37,7 @@ namespace Business.Concrete
             else if(result.VoteDate!=vote.VoteDate)
             {
                 result.VoteLimit = 1;
-                vote.UserId=null;
+                //vote.UserId=null;
                 _voteDal.Add(vote);
                 _userInfoDal.Update(result);
                 return new SuccessResult(Messages.VoteSuccess);

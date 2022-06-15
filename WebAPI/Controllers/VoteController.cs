@@ -20,8 +20,6 @@ namespace WebAPI.Controllers
         public IActionResult Post(Vote vote)
         {
             
-
-         
             var result = _voteService.Add(vote);
             if (result.Success)
             {
@@ -29,6 +27,9 @@ namespace WebAPI.Controllers
 
             }
             return BadRequest(result.Message);
+            
         }
+
+       
     }
 }

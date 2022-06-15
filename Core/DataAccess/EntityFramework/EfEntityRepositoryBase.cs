@@ -14,22 +14,10 @@ namespace Core.DataAccess.EntityFramework
             //IDisposable pattern
             using (TContext context = new TContext())
             {
-                using(var transaction = context.Database.BeginTransaction())
-                {
-                    try
-                    {
+
                         var addedEntity = context.Entry(entity);
                         addedEntity.State = EntityState.Added;
                         context.SaveChanges();
-
-                        transaction.Commit();
-                    }
-                    catch (Exception ex)
-                    {
-
-                        transaction.Rollback();
-                    }
-                }
                 
             }
         }
