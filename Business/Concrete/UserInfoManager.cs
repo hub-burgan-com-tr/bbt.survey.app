@@ -9,10 +9,12 @@ namespace Business.Concrete
     public class UserInfoManager : IUserInfoService
     {
         IUserInfoDal _userInfoDal;
+        IVoteLimitDal _voteLimitDal;
 
-        public UserInfoManager(IUserInfoDal userInfoDal)
+        public UserInfoManager(IUserInfoDal userInfoDal,IVoteLimitDal voteLimitDal)
         {
             _userInfoDal = userInfoDal;
+            _voteLimitDal = voteLimitDal;
 
         }
 
@@ -20,7 +22,8 @@ namespace Business.Concrete
         public IResult Add(UserInfo userInfo)
         {
             var result =_userInfoDal.GetAll(x=>x.UserId == userInfo.UserId).ToList();
-            
+            var limit = _voteLimitDal.GetAll().FirstOrDefault().Limit;
+
             if (result.Count!=0)
             {
                 //_userInfoDal.Update(userInfo);
@@ -30,7 +33,7 @@ namespace Business.Concrete
             }
             else
             {
-                userInfo.VoteLimit = 2;
+                userInfo.VoteLimit = limit;
                 _userInfoDal.Add(userInfo);
                 UserInfo resultData = _userInfoDal.GetAll(x => x.UserId == userInfo.UserId).FirstOrDefault();
 

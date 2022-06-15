@@ -24,6 +24,7 @@ namespace Business.Concrete
         public IResult Add(Vote vote)
         {
             vote.VoteDate = DateTime.Now.Date;
+            vote.Date = DateTime.Now;
             var result= _userInfoDal.Get(x=>x.UserId==vote.UserId);
             if (result.VoteLimit>0&&result.VoteDate<=vote.VoteDate)
             {
@@ -46,12 +47,7 @@ namespace Business.Concrete
             {
                 return new ErrorResult(Messages.VoteFailed);
             }
-
-            
-            return new SuccessResult();
         }
 
-
-       
     }
 }
