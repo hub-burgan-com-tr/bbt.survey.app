@@ -45,7 +45,7 @@ namespace Business.Concrete
             }
             else
             {
-                return new ErrorResult(Messages.VoteFailed);
+                return new SuccessResult(Messages.VoteFailed);
             }
         }
 
