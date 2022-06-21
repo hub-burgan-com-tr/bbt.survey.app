@@ -37,6 +37,7 @@ namespace Business.Concrete
             }
             else if(result.VoteDate!=vote.VoteDate)
             {
+                result.VoteDate = vote.VoteDate;
                 result.VoteLimit = 1;
                 //vote.UserId=null;
                 _voteDal.Add(vote);
