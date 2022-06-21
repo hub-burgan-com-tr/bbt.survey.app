@@ -26,7 +26,7 @@ namespace Business.Concrete
             vote.VoteDate = DateTime.Now.Date;
             vote.Date = DateTime.Now;
             var result= _userInfoDal.Get(x=>x.UserId==vote.UserId);
-            if (result.VoteLimit>0&&result.VoteDate<=vote.VoteDate)
+            if (result.VoteLimit>0&&result.VoteDate==vote.VoteDate)
             {
                 //vote.UserId = null;
                 _voteDal.Add(vote);
