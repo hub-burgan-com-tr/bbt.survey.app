@@ -45,6 +45,7 @@ namespace Business.Concrete
             //     return new SuccessResult(Messages.VoteSuccess);
             // }
             if (result.VoteDate != vote.VoteDate)
+            //
             {
                 result.VoteDate = vote.VoteDate;
                 result.VoteLimit = 0;
