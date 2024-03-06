@@ -11,17 +11,17 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class UserDataContext : DbContext
     {
-  
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            
+
 
             IConfigurationRoot configuration = new ConfigurationBuilder()
            .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
 
            .AddJsonFile("appsettings.Prod.json", optional: false, reloadOnChange: true)
-           
-           
+
+
 
            .Build();
             optionsBuilder.UseSqlServer(configuration.GetConnectionString("UserDataConnection"));
@@ -30,9 +30,9 @@ namespace DataAccess.Concrete.EntityFramework
             base.OnConfiguring(optionsBuilder);
 
         }
-        
-        
-        
+
+
+
 
         public DbSet<User>? PERTRANS1 { get; set; }
     }
