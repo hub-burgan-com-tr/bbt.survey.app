@@ -44,8 +44,7 @@ namespace Business.Concrete
             //     _userInfoDal.Update(result);
             //     return new SuccessResult(Messages.VoteSuccess);
             // }
-            if (result.VoteDate != vote.VoteDate)
-            //
+            if (result.VoteDate == null || result.VoteDate.Date != vote.VoteDate.Date)
             {
                 result.VoteDate = vote.VoteDate;
                 result.VoteLimit = 0;
