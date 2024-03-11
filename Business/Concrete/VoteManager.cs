@@ -21,6 +21,7 @@ namespace Business.Concrete
             _voteDal = voteDal;
             _userInfoDal = userInfoDal;
         }
+
         public IResult Add(Vote vote)
         {
             vote.VoteDate = DateTime.Now.Date;
