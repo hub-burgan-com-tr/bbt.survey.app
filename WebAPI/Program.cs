@@ -5,10 +5,20 @@ using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 using Microsoft.AspNetCore.Authentication.Negotiate;
 using Microsoft.EntityFrameworkCore;
+using RedLockNet.SERedis;
+using RedLockNet;
 using Serilog;
+using Serilog.Events;
+using Serilog.Filters;
+using Serilog.Formatting.Elasticsearch;
+using Serilog.Sinks.Elasticsearch;
+using System.Collections.Generic;
 using System.Configuration;
+using System.Net;
 using WebAPI.BackgroundServices;
-
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using StackExchange.Redis;
+using RedLockNet.SERedis.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,9 +41,17 @@ builder.Services.AddSingleton<IVoteDal, EfVoteDal>();
 builder.Services.AddSignalR();
 builder.Services.AddDbContext<UserContext>();
 builder.Services.AddDbContext<UserDataContext>();
+
 //builder.Services.AddHostedService<AddDataAutomatically>();
 
 
+var connectionMultiplexer = ConnectionMultiplexer.Connect(builder.Configuration["Redis"]);
+Console.WriteLine(builder.Configuration["Redis"]);
+var redLockFactory = RedLockFactory.Create(new List<RedLockEndPoint>
+{
+    new DnsEndPoint(builder.Configuration["Redis"], 6379)
+});
+builder.Services.AddSingleton<IDistributedLockFactory>(redLockFactory);
 var logger = new LoggerConfiguration()
     .ReadFrom.Configuration(builder.Configuration)
     .Enrich.FromLogContext()
@@ -48,8 +66,11 @@ builder.Services.AddAuthentication(NegotiateDefaults.AuthenticationScheme)
 builder.Services.AddAuthorization(options =>
 {
     // By default, all incoming requests will be authorized according to the default policy.
-//    options.FallbackPolicy = options.DefaultPolicy;
+    //    options.FallbackPolicy = options.DefaultPolicy;
 });
+
+
+
 
 var app = builder.Build();
 

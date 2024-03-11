@@ -1,0 +1,46 @@
+version: '3.4'
+
+services:
+  redis:
+    container_name: redis
+    image: redis/redis-stack-server:latest
+    restart: always
+    ports:
+        - "6379:6379"
+    networks:
+        - surveyapp
+
+  elasticsearch:
+    container_name: elasticsearch
+    image: elasticsearch:8.8.1
+    ports:
+        - 9200:9200
+    volumes:
+        - elasticsearch-data:/usr/share/elasticsearch/data
+    environment:
+        - xpack.monitoring.enabled=true
+        - xpack.watcher.enabled=false
+        - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+        - discovery.type=single-node
+    networks:
+        - surveyapp
+
+  kibana:
+    container_name: kibana
+    image: kibana:8.8.1
+    ports:
+        - 5601:5601
+    depends_on:
+        - elasticsearch
+    environment:
+        - ELASTICSEARCH_URL=http://localhost:9200
+    networks:
+        - surveyapp
+
+networks:
+  surveyapp:
+    name: surveyapp
+    driver: bridge
+
+volumes:
+  elasticsearch-data:
