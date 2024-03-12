@@ -45,18 +45,22 @@ namespace Business.Concrete
             //     _userInfoDal.Update(result);
             //     return new SuccessResult(Messages.VoteSuccess);
             // }
-            if (result.VoteDate == null || result.VoteDate.Date != vote.VoteDate.Date)
+            lock (vote.UserId)
             {
-                result.VoteDate = vote.VoteDate;
-                result.VoteLimit = 0;
-                _voteDal.Add(vote);
-                _userInfoDal.Update(result);
-                return new SuccessResult(Messages.VoteSuccess);
+                if (result.VoteDate == null || result.VoteDate.Date != vote.VoteDate.Date)
+                {
+                    result.VoteDate = vote.VoteDate;
+                    result.VoteLimit = 0;
+                    _voteDal.Add(vote);
+                    _userInfoDal.Update(result);
+                    return new SuccessResult(Messages.VoteSuccess);
+                }
+                else
+                {
+                    return new SuccessResult(Messages.VoteFailed);
+                }
             }
-            else
-            {
-                return new SuccessResult(Messages.VoteFailed);
-            }
+           
         }
 
     }
