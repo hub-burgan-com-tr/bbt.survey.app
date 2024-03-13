@@ -21,13 +21,15 @@ namespace WebAPI.Controllers
         [HttpPost]
         public IActionResult Post(Vote vote)
         {
-
-            var result = _voteService.Add(vote);
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-            return BadRequest(result.Message);
+          
+                var result = _voteService.Add(vote);
+                if (result.Success)
+                {
+                    return Ok(result);
+                }
+                return BadRequest(result.Message);
+            
+          
 
         }
 

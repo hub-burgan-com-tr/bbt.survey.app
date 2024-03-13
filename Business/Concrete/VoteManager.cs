@@ -15,6 +15,7 @@ namespace Business.Concrete
     {
         IVoteDal _voteDal;
         IUserInfoDal _userInfoDal;
+        static readonly object obj = new object();
 
         public VoteManager(IVoteDal voteDal, IUserInfoDal userInfoDal)
         {
@@ -24,35 +25,19 @@ namespace Business.Concrete
 
         public IResult Add(Vote vote)
         {
-            vote.VoteDate = DateTime.Now.Date;
-            vote.Date = DateTime.Now;
-            var result = _userInfoDal.Get(x => x.UserId == vote.UserId);
-            // if (result.VoteLimit > 0 && result.VoteDate == vote.VoteDate)
-            // {
-            //     //vote.UserId = null;
-            //     _voteDal.Add(vote);
-            //     result.VoteLimit--;
-            //     result.VoteDate = vote.VoteDate;
-            //     _userInfoDal.Update(result);
-            //     return new SuccessResult(Messages.VoteSuccess);
-            // }
-            // else if (result.VoteDate != vote.VoteDate)
-            // {
-            //     result.VoteDate = vote.VoteDate;
-            //     result.VoteLimit = 0;
-            //     //vote.UserId=null;
-            //     _voteDal.Add(vote);
-            //     _userInfoDal.Update(result);
-            //     return new SuccessResult(Messages.VoteSuccess);
-            // }
-            lock (vote.UserId)
+            lock (obj)
             {
+                vote.VoteDate = DateTime.Now.Date;
+                vote.Date = DateTime.Now;
+                var result = _userInfoDal.Get(x => x.UserId == vote.UserId);
+
                 if (result.VoteDate == null || result.VoteDate.Date != vote.VoteDate.Date)
                 {
                     result.VoteDate = vote.VoteDate;
                     result.VoteLimit = 0;
                     _voteDal.Add(vote);
                     _userInfoDal.Update(result);
+
                     return new SuccessResult(Messages.VoteSuccess);
                 }
                 else
@@ -60,7 +45,7 @@ namespace Business.Concrete
                     return new SuccessResult(Messages.VoteFailed);
                 }
             }
-           
+
         }
 
     }
