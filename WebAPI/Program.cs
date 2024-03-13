@@ -19,6 +19,7 @@ using WebAPI.BackgroundServices;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 using StackExchange.Redis;
 using RedLockNet.SERedis.Configuration;
+using WebAPI;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -42,16 +43,6 @@ builder.Services.AddSignalR();
 builder.Services.AddDbContext<UserContext>();
 builder.Services.AddDbContext<UserDataContext>();
 
-//builder.Services.AddHostedService<AddDataAutomatically>();
-
-
-var connectionMultiplexer = ConnectionMultiplexer.Connect(builder.Configuration["Redis"]);
-Console.WriteLine(builder.Configuration["Redis"]);
-var redLockFactory = RedLockFactory.Create(new List<RedLockEndPoint>
-{
-    new DnsEndPoint(builder.Configuration["Redis"], 6379)
-});
-builder.Services.AddSingleton<IDistributedLockFactory>(redLockFactory);
 var logger = new LoggerConfiguration()
     .ReadFrom.Configuration(builder.Configuration)
     .Enrich.FromLogContext()
@@ -86,7 +77,6 @@ else
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
 
 //app.UseHttpsRedirection();
 app.UseAuthentication();
